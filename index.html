@@ -64,6 +64,7 @@
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
       transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
     .gallery img:hover {
@@ -256,24 +257,37 @@ Umarım hep mutlu, huzurlu olursun.
   <script>
     document.querySelectorAll('.gallery img').forEach(img => {
       img.addEventListener('click', () => {
-        const rect = img.getBoundingClientRect(); // Görselin konumunu al
+        const rect = img.getBoundingClientRect();
 
         for (let i = 0; i < 10; i++) {
           const butterfly = document.createElement('img');
           butterfly.src = 'butterfly.png';
           butterfly.className = 'butterfly';
 
-          // Görselin merkezinden çıkış
-          const offsetX = rect.left + rect.width / 2;
-          const offsetY = rect.top + rect.height / 2;
+          const side = Math.floor(Math.random() * 4);
+          let x = 0, y = 0;
 
-          butterfly.style.left = `${offsetX}px`;
-          butterfly.style.top = `${offsetY}px`;
+          if (side === 0) { // üst
+            x = rect.left + Math.random() * rect.width;
+            y = rect.top;
+          } else if (side === 1) { // sağ
+            x = rect.right;
+            y = rect.top + Math.random() * rect.height;
+          } else if (side === 2) { // alt
+            x = rect.left + Math.random() * rect.width;
+            y = rect.bottom;
+          } else if (side === 3) { // sol
+            x = rect.left;
+            y = rect.top + Math.random() * rect.height;
+          }
 
-          const x = Math.random();
-          const y = Math.random();
-          butterfly.style.setProperty('--x', x);
-          butterfly.style.setProperty('--y', y);
+          butterfly.style.left = `${x}px`;
+          butterfly.style.top = `${y}px`;
+
+          const randX = Math.random();
+          const randY = Math.random();
+          butterfly.style.setProperty('--x', randX);
+          butterfly.style.setProperty('--y', randY);
 
           document.body.appendChild(butterfly);
 
