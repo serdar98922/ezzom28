@@ -111,6 +111,23 @@
     audio {
       display: none;
     }
+.signature {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 2rem;
+  color: #ffc4ec;
+  margin-top: 1rem;
+  white-space: pre;
+  animation: signature-typing 3s steps(10) forwards;
+  overflow: hidden;
+  width: 0;
+  border-right: 2px solid #ffc4ec;
+}
+
+@keyframes signature-typing {
+  from { width: 0; }
+  to { width: 10ch; }
+}
+
   </style>
 </head>
 <body>
@@ -150,6 +167,7 @@ Umarım hep mutlu, huzurlu olursun.
 
 İyi ki doğdun Ezzom ❤️
     </p>
+<div id="signature" class="signature"></div>
 
     <div class="gallery">
       <img src="65269375-b9d2-4779-a6af-3abf8593083e.jpg" alt="Ezzo Fotoğraf 1" />
@@ -230,6 +248,11 @@ Umarım hep mutlu, huzurlu olursun.
   }
 
   animate();
+</script>
+<script>
+  window.addEventListener('load', () => {
+    document.getElementById('signature').textContent = '– Serdar 💖';
+  });
 </script>
 
 </body>
