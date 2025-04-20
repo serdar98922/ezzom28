@@ -122,6 +122,26 @@
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 
+.butterfly {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  z-index: 20;
+  animation: butterfly-fly 2.5s ease-out forwards;
+  transition: opacity 0.5s ease-out;
+}
+
+@keyframes butterfly-fly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50px + 100px * var(--x)), calc(-150px + -100px * var(--y))) scale(0.5) rotate(360deg);
+  }
+}
 
   </style>
 </head>
@@ -247,6 +267,35 @@ Umarım hep mutlu, huzurlu olursun.
   window.addEventListener('load', () => {
  
   });
+<script>
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('click', e => {
+      for (let i = 0; i < 10; i++) {
+        const butterfly = document.createElement('img');
+        butterfly.src = 'butterfly.png';
+        butterfly.className = 'butterfly';
+
+        // Konum belirle
+        butterfly.style.left = `${e.clientX}px`;
+        butterfly.style.top = `${e.clientY}px`;
+
+        // Rasgele yön için değişkenler
+        const x = Math.random();
+        const y = Math.random();
+        butterfly.style.setProperty('--x', x);
+        butterfly.style.setProperty('--y', y);
+
+        document.body.appendChild(butterfly);
+
+        // 2.5 saniye sonra kelebekleri sil
+        setTimeout(() => {
+          butterfly.remove();
+        }, 2500);
+      }
+    });
+  });
+</script>
+
 </script>
 
 </body>
