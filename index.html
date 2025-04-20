@@ -115,24 +115,14 @@
       display: none;
     }
 
-    @keyframes signature-typing {
-      from { width: 0; }
-      to { width: 10ch; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .butterfly {
       position: fixed;
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
       pointer-events: none;
       z-index: 20;
-      animation: butterfly-fly 2.5s ease-out forwards;
-      transition: opacity 0.5s ease-out;
+      animation: butterfly-fly 4s ease-out forwards;
+      transition: opacity 1s ease-out;
     }
 
     @keyframes butterfly-fly {
@@ -142,7 +132,7 @@
       }
       100% {
         opacity: 0;
-        transform: translate(calc(-50px + 100px * var(--x)), calc(-150px + -100px * var(--y))) scale(0.5) rotate(360deg);
+        transform: translate(calc(-50px + 100px * var(--x)), calc(-150px + -100px * var(--y))) scale(0.6) rotate(360deg);
       }
     }
   </style>
@@ -246,21 +236,17 @@ Umarım hep mutlu, huzurlu olursun.
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       stars.forEach(star => {
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
-
         star.x -= star.speed;
         star.y += star.speed;
-
         if (star.x < 0 || star.y > canvas.height) {
           Object.assign(star, createStar(), { y: 0 });
         }
       });
-
       requestAnimationFrame(animate);
     }
 
@@ -269,21 +255,31 @@ Umarım hep mutlu, huzurlu olursun.
 
   <script>
     document.querySelectorAll('.gallery img').forEach(img => {
-      img.addEventListener('click', e => {
+      img.addEventListener('click', () => {
+        const rect = img.getBoundingClientRect(); // Görselin konumunu al
+
         for (let i = 0; i < 10; i++) {
           const butterfly = document.createElement('img');
           butterfly.src = 'butterfly.png';
           butterfly.className = 'butterfly';
-          butterfly.style.left = `${e.clientX}px`;
-          butterfly.style.top = `${e.clientY}px`;
+
+          // Görselin merkezinden çıkış
+          const offsetX = rect.left + rect.width / 2;
+          const offsetY = rect.top + rect.height / 2;
+
+          butterfly.style.left = `${offsetX}px`;
+          butterfly.style.top = `${offsetY}px`;
+
           const x = Math.random();
           const y = Math.random();
           butterfly.style.setProperty('--x', x);
           butterfly.style.setProperty('--y', y);
+
           document.body.appendChild(butterfly);
+
           setTimeout(() => {
             butterfly.remove();
-          }, 2500);
+          }, 4000);
         }
       });
     });
