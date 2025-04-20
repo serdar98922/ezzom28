@@ -5,19 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#000000" />
   <title>Ezzo'ya Doğum Günü Sürprizi</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
-#stars {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
+    #stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-    /* Genel stil */
     body {
       margin: 0;
       padding: 0;
@@ -26,13 +25,10 @@
       text-align: center;
       background-image: url('background.jpg');
       background-size: cover;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      -webkit-text-size-adjust: 100%;
     }
+
     .overlay {
       background-color: rgba(0, 0, 0, 0.6);
       padding: 2rem;
@@ -41,17 +37,19 @@
       width: 90%;
       max-width: 800px;
     }
+
     h1 {
       font-size: 2.8rem;
       margin-bottom: 1rem;
     }
+
     .message {
       font-size: 1.2rem;
       line-height: 1.8;
       white-space: pre-wrap;
       margin-bottom: 2rem;
     }
-    /* Galeri stili */
+
     .gallery {
       display: flex;
       justify-content: center;
@@ -59,6 +57,7 @@
       flex-wrap: wrap;
       margin-bottom: 2rem;
     }
+
     .gallery img {
       width: calc(50% - 1rem);
       max-width: 300px;
@@ -66,15 +65,15 @@
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
       transition: transform 0.3s ease;
     }
+
     .gallery img:hover {
       transform: scale(1.05);
     }
-    /* Buton stili */
+
     button {
-      -webkit-appearance: none;
       appearance: none;
     }
-    /* Kaktüs confetti butonu */
+
     #cactusButton {
       background: #e63946;
       border: none;
@@ -86,10 +85,11 @@
       margin-bottom: 1rem;
       transition: background-color 0.3s ease;
     }
+
     #cactusButton:hover {
       background-color: #d62828;
     }
-    /* Müzik kalp butonu */
+
     #musicButton {
       width: 60px;
       height: 60px;
@@ -106,68 +106,69 @@
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
       transition: background-color 0.3s ease;
     }
+
     #musicButton:hover {
       background-color: #d62828;
     }
+
     audio {
       display: none;
     }
 
-@keyframes signature-typing {
-  from { width: 0; }
-  to { width: 10ch; }
+    @keyframes signature-typing {
+      from { width: 0; }
+      to { width: 10ch; }
+    }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+    .butterfly {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      pointer-events: none;
+      z-index: 20;
+      animation: butterfly-fly 2.5s ease-out forwards;
+      transition: opacity 0.5s ease-out;
+    }
 
-.butterfly {
-  position: fixed;
-  width: 30px;
-  height: 30px;
-  pointer-events: none;
-  z-index: 20;
-  animation: butterfly-fly 2.5s ease-out forwards;
-  transition: opacity 0.5s ease-out;
-}
-
-@keyframes butterfly-fly {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50px + 100px * var(--x)), calc(-150px + -100px * var(--y))) scale(0.5) rotate(360deg);
-  }
-}
-
+    @keyframes butterfly-fly {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50px + 100px * var(--x)), calc(-150px + -100px * var(--y))) scale(0.5) rotate(360deg);
+      }
+    }
   </style>
 </head>
 <body>
-<canvas id="stars"></canvas>
+  <canvas id="stars"></canvas>
   <div class="overlay">
-<!-- Geri Sayım -->
-<div id="countdown" style="font-size: 1.5rem; margin-bottom: 1rem;"></div>
-<script>
-  function updateCountdown() {
-    const now = new Date();
-    let target = new Date(now.getFullYear(), 3, 22); // 22 Nisan
-    if (now > target) {
-      target = new Date(now.getFullYear() + 1, 3, 22);
-    }
-    const diff = target - now;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-    document.getElementById("countdown").textContent =
-      `🎉 Ezzo'nun doğum gününe ${days} gün ${hours} saat ${minutes} dakika ${seconds} saniye kaldı!`;
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-</script>
+    <div id="countdown" style="font-size: 1.5rem; margin-bottom: 1rem;"></div>
+    <script>
+      function updateCountdown() {
+        const now = new Date();
+        let target = new Date(now.getFullYear(), 3, 22);
+        if (now > target) {
+          target = new Date(now.getFullYear() + 1, 3, 22);
+        }
+        const diff = target - now;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        document.getElementById("countdown").textContent =
+          `🎉 Ezzo'nun doğum gününe ${days} gün ${hours} saat ${minutes} dakika ${seconds} saniye kaldı!`;
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    </script>
 
     <h1>Ezzo'ya</h1>
     <p class="message">
@@ -197,8 +198,8 @@ Umarım hep mutlu, huzurlu olursun.
     Tarayıcınız bu ses öğesini desteklemiyor.
   </audio>
 
-  <!-- Confetti ve müzik kontrolü -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
   <script>
     document.getElementById('musicButton').addEventListener('click', () => {
       const music = document.getElementById('music');
@@ -210,93 +211,82 @@ Umarım hep mutlu, huzurlu olursun.
         document.getElementById('musicButton').textContent = '❤️';
       }
     });
+
     document.getElementById('cactusButton').addEventListener('click', () => {
       confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
     });
   </script>
-<script>
-  const canvas = document.getElementById('stars');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
+  <script>
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
 
-  window.addEventListener('resize', resize);
-  resize();
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
 
-  function createStar() {
-    return {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 1.2,
-      speed: Math.random() * 0.3 + 0.1,
-      opacity: Math.random() * 0.5 + 0.3
-    };
-  }
+    window.addEventListener('resize', resize);
+    resize();
 
-  for (let i = 0; i < 120; i++) {
-    stars.push(createStar());
-  }
+    function createStar() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 1.2,
+        speed: Math.random() * 0.3 + 0.1,
+        opacity: Math.random() * 0.5 + 0.3
+      };
+    }
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < 120; i++) {
+      stars.push(createStar());
+    }
 
-    stars.forEach(star => {
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
-      ctx.fill();
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      star.x -= star.speed;
-      star.y += star.speed;
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        ctx.fill();
 
-      if (star.x < 0 || star.y > canvas.height) {
-        Object.assign(star, createStar(), { y: 0 });
-      }
+        star.x -= star.speed;
+        star.y += star.speed;
+
+        if (star.x < 0 || star.y > canvas.height) {
+          Object.assign(star, createStar(), { y: 0 });
+        }
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+  <script>
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', e => {
+        for (let i = 0; i < 10; i++) {
+          const butterfly = document.createElement('img');
+          butterfly.src = 'butterfly.png';
+          butterfly.className = 'butterfly';
+          butterfly.style.left = `${e.clientX}px`;
+          butterfly.style.top = `${e.clientY}px`;
+          const x = Math.random();
+          const y = Math.random();
+          butterfly.style.setProperty('--x', x);
+          butterfly.style.setProperty('--y', y);
+          document.body.appendChild(butterfly);
+          setTimeout(() => {
+            butterfly.remove();
+          }, 2500);
+        }
+      });
     });
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-</script>
-<script>
-  window.addEventListener('load', () => {
- 
-  });
-<script>
-  document.querySelectorAll('.gallery img').forEach(img => {
-    img.addEventListener('click', e => {
-      for (let i = 0; i < 10; i++) {
-        const butterfly = document.createElement('img');
-        butterfly.src = 'butterfly.png';
-        butterfly.className = 'butterfly';
-
-        // Konum belirle
-        butterfly.style.left = `${e.clientX}px`;
-        butterfly.style.top = `${e.clientY}px`;
-
-        // Rasgele yön için değişkenler
-        const x = Math.random();
-        const y = Math.random();
-        butterfly.style.setProperty('--x', x);
-        butterfly.style.setProperty('--y', y);
-
-        document.body.appendChild(butterfly);
-
-        // 2.5 saniye sonra kelebekleri sil
-        setTimeout(() => {
-          butterfly.remove();
-        }, 2500);
-      }
-    });
-  });
-</script>
-
-</script>
-
+  </script>
 </body>
 </html>
