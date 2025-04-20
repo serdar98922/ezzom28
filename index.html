@@ -105,6 +105,27 @@
 </head>
 <body>
   <div class="overlay">
+<!-- Geri Sayım -->
+<div id="countdown" style="font-size: 1.5rem; margin-bottom: 1rem;"></div>
+<script>
+  function updateCountdown() {
+    const now = new Date();
+    let target = new Date(now.getFullYear(), 3, 22); // 22 Nisan
+    if (now > target) {
+      target = new Date(now.getFullYear() + 1, 3, 22);
+    }
+    const diff = target - now;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    document.getElementById("countdown").textContent =
+      `🎉 Ezzo'nun doğum gününe ${days} gün ${hours} saat ${minutes} dakika ${seconds} saniye kaldı!`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
     <h1>Ezzo'ya</h1>
     <p class="message">
 İyi ki doğdun, iyi ki varsın, iyi ki tanıdım seni... 
